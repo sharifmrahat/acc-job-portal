@@ -6,8 +6,12 @@ const cors = require("cors")
 app.use(express.json())
 app.use(cors())
 
+const jobRoute = require('./routes/job.route')
+
 app.get("/", (req, res)=> {
     res.send('Server is running')
 })
+
+app.use("/jobs",jobRoute)
 
 module.exports = app

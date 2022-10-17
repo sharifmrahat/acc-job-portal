@@ -21,11 +21,11 @@ const jobSchema = mongoose.Schema({
     lowercase: true,
   },
   description: String,
-  remuneration: {
-    type: Number,
-    required: true,
-    min: [0, "Remuneration can't be negative"]
-  },
+  // remuneration: {
+  //   type: Number,
+  //   required: true,
+  //   min: [0, "Remuneration can't be negative"]
+  // },
   totalApplied: {
     type: Number,
     required: true,
