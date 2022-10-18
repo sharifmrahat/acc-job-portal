@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router()
 const jobController = require("../controllers/job.controller");
+const fileUploader = require('../middleware/fileUploader');
 const { verifyToken } = require('../middleware/verifyToken');
 
 
@@ -10,7 +11,7 @@ router
     .post(verifyToken, jobController.createJob)
 
 router
-    .post('/:id/apply', jobController.applyJob)
+    .post('/:id/apply', fileUploader.single("pdf"), jobController.applyJob)
 
 router
     .route('/:id')
