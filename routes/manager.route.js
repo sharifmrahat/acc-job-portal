@@ -10,10 +10,10 @@ router
     .post(managerController.createManager)
 
 router
-    .get('/jobs', managerController.selectedManagerJobs)
+    .get('/jobs', verifyToken, managerController.selectedManagerJobs)
 
 router
-    .get('/jobs/:id', managerController.selectedManagerJobById)
+    .get('/jobs/:id', verifyToken, managerController.selectedManagerJobById)
 
 router
     .route('/:id')
