@@ -9,7 +9,7 @@ const jobSchema = mongoose.Schema({
         },
         id: {
           type: ObjectId,
-          ref:"Manager"
+          ref:"User"
         }
       },
   title: {
@@ -21,24 +21,38 @@ const jobSchema = mongoose.Schema({
     lowercase: true,
   },
   description: String,
-  // remuneration: {
-  //   type: Number,
-  //   required: true,
-  //   min: [0, "Remuneration can't be negative"]
-  // },
+  jobType:{
+    enum:['Internship', 'Full Time', 'Contractual'],
+    default:'Full Time',
+    type:String
+  },
+  salary: {
+    type: Number,
+    required: true,
+    min: [0, "Salary can't be negative"]
+  },
   totalApplied: {
     type: Number,
     required: true,
     min: [0, "Number of applied must be integer"]
   },
- 
-  candidates: [{
-    name: String,
-    contanctNumber: String,
-    id: {
+  appliedInfo: [{
+    candidateId:  {
       type: ObjectId,
       ref: "Candidate"
+    },
+    id: {
+      type: ObjectId,
+      ref: "AppliedInfo"
     }
+  }],
+  deadline:{
+    type:Date,
+    required:true
+  },
+  candidates: [{    
+      type: ObjectId,
+      ref: "Candidate"
   }],
   isActive: {
     type: Boolean,
