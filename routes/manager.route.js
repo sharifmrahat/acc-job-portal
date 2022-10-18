@@ -1,6 +1,7 @@
 const express = require('express');
 const managerController = require("../controllers/manager.controller");
 const { verifyToken } = require('../middleware/verifyToken');
+const authorization = require('../utils/authorization');
 
 const router = express.Router();
 
@@ -10,10 +11,10 @@ router
     .post(managerController.createManager)
 
 router
-    .get('/jobs', verifyToken, managerController.selectedManagerJobs)
+    .get('/jobs', verifyToken, authorization('manager'), managerController.selectedManagerJobs)
 
 router
-    .get('/jobs/:id', verifyToken, managerController.selectedManagerJobById)
+    .get('/jobs/:id', verifyToken, authorization('manager'), managerController.selectedManagerJobById)
 
 router
     .route('/:id')

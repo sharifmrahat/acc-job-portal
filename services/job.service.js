@@ -5,14 +5,14 @@ exports.createJobService = async (data) => {
     return newJob;
   }
   
-exports.findAllJobService = async () => {
-    const jobs = await Job.find();
+exports.findAllJobService = async (query) => {
+    const jobs = await Job.find({...query?.data}).limit(query?.limit);
     return jobs;
   }
 
   
 exports.findOneJobService = async (_id) => {
-    const job = await Job.findOne({ _id })
+  const job = await Job.find({ ...query?.data }).populate('candidates')
     return job;
   }
   

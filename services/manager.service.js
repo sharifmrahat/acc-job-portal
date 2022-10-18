@@ -1,4 +1,5 @@
 const Manager = require("../models/Manager");
+const User = require("../models/User");
 
 exports.createManagerService = async (data) => {
   const newManager = await Manager.create(data);
