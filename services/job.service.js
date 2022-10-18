@@ -1,4 +1,6 @@
 const Job = require("../models/Job");
+const AppliedInfo = require("../models/AppliedInfo");
+const Candidate = require("../models/Candidate");
 
 exports.createJobService = async (data) => {
     const newJob = await Job.create(data);
