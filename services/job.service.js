@@ -24,3 +24,24 @@ exports.findOneJobService = async (_id) => {
     });
     return updatedJob;
   }
+
+  exports.appliedJobInfoService = async (data) => {
+    const result = await AppliedInfo.create({...data});
+    const {_id:appliedInfoId, candidate, job}= result;
+  
+     const selectedJob = await Job.updateOne(
+      {_id:job},
+
+      {$push : {appliedInfo: {id:appliedInfoId, candidateId:candidate},
+      candidates:candidate}}
+      )
+
+     const selectedCandidate = await Candidate.updateOne(
+      {_id:candidate.toString()},
+      {$inc: {totalApplied:1}},
+      {$push : {appliedInfo: appliedInfoId,
+      jobs:job}}
+      )
+  
+    return result;
+  }
