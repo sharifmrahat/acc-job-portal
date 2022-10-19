@@ -68,12 +68,38 @@ const userSchema = mongoose.Schema(
     isActive: {
         type: Boolean,
         default: true
-      }
+      },
+      jobs: [{
+        name: String,
+        contactNumber: String,
+        id: {
+          type: ObjectId,
+          ref: "Job"
+        }
+      }],
   },
   {
     timestamps: true,
   }
 );
+
+userSchema.pre("save", function (next) {
+  if (!this.isModified("password")) {
+    return next();
+  }
+  const password = this.password;
+
+  const hashedPassword = bcrypt.hashSync(password);
+
+  this.password = hashedPassword;
+  this.confirmPassword = undefined;
+  next();
+});
+
+userSchema.methods.comparePassword = function (password, hash) {
+  const isPasswordValid = bcrypt.compareSync(password, hash);
+  return isPasswordValid;
+};
 
 const User = mongoose.model("User", userSchema);
 
