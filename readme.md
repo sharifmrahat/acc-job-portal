@@ -1,6 +1,6 @@
 ## Job Portal Backend
 
-- Live Server Link: 
+- Live Server Link: https://acc-job-portal.onrender.com
 
 ### Routes
 
