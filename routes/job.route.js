@@ -12,7 +12,7 @@ router
     .post(verifyToken, authorization('manager'), jobController.createJob)
 
 router
-    .post('/:id/apply', fileUploader.single("pdf"), jobController.applyJob)
+    .post('/:id/apply', verifyToken,authorization('candidate'), fileUploader.single("pdf"), jobController.applyJob)
 
 router
     .route('/:id')
