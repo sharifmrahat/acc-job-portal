@@ -7,6 +7,10 @@ const jobSchema = mongoose.Schema({
           type: String,
           trim: true,
         },
+        email: {
+          type: String,
+          trim: true,
+        },
         id: {
           type: ObjectId,
           ref:"User"

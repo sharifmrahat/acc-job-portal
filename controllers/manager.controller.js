@@ -42,8 +42,10 @@ exports.selectedManagerJobs = async (req, res, next) => {
     const { _id } = req.user;
     const query = {};
     if (_id) {
-      query.data = { "manager.id": _id };
+      query.data = { "manager.id": _id,};
+      query.limit = +req.query.limit
     }
+   
 
     const result = await jobService.findAllJobService(query);
 
@@ -59,9 +61,8 @@ exports.selectedManagerJobById = async (req, res, next) => {
     const query = {};
     if (_id) {
       query.data = { "manager.id": _id };
+      query.id = req.params.id
     }
-    query.populate = "candidates";
-
     const result = await jobService.findOneJobService(query);
     res.status(200).json({success: true, result: result})
   } catch (error) {

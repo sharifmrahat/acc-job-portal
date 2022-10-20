@@ -72,8 +72,7 @@ const userSchema = mongoose.Schema(
         default: true
       },
       jobs: [{
-        name: String,
-        contactNumber: String,
+        title: String,
         id: {
           type: ObjectId,
           ref: "Job"
