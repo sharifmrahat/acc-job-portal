@@ -25,6 +25,7 @@ const jobSchema = mongoose.Schema({
     lowercase: true,
   },
   description: String,
+  location: String,
   jobType:{
     enum:['Internship', 'Full Time', 'Contractual'],
     default:'Full Time',

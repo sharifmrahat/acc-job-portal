@@ -12,10 +12,11 @@ exports.findAllJob = async (req, res, next) => {
       candidates:0,
       appliedInfo:0
     }
+    query.limit = +req.query?.limit
+    query.sort = req.query?.sort
+
       const jobs = await JobService.findAllJobService(query)
-      return res.status(200).json({
-        success: true, data: jobs
-        })
+      return res.status(200).json({success: true, data: jobs})
   } catch (error) {
     res.status(400).json({ success: false, error: error.message });
   }
@@ -76,7 +77,7 @@ exports.applyJob = async (req, res, next) => {
   try {
     const {_id} = req.user
     const currentCandidate = await candidateService.findOneCandidateService({data:{'user.id':_id}})
-    const jobId =  req.params.id
+    const jobId =  req.params?.id
     const candidateId  = currentCandidate._id
     const selectedJob = {jobId, candidateId}
     selectedJob.data = {_id: jobId}

@@ -29,10 +29,8 @@ const candidateSchema = mongoose.Schema(
         ref: "Job",
       },
     ],
-    appliedJobs: [
+    jobs: [
       {
-        title: String,
-        description: String,
         id: {
           type: ObjectId,
           ref: "Job",

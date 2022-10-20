@@ -6,12 +6,12 @@ exports.signupUser = async (req, res, next) => {
     try {
         const newUser = await userService.createUserService(req.body);
       
-      if(req.body.role === "candidate"){
+      if(newUser.role === "candidate"){
         const user = req.body
         await createCandidateService({
           name: `${user.firstName} ${user.lastName}` ,
           user:{
-            id: result._id
+            id: newUser._id
           }
         })
       }

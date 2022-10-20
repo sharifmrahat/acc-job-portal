@@ -10,7 +10,7 @@ const storage = multer.diskStorage({
   }
 })
 
-const uploader = multer({
+const fileUploader = multer({
   storage,
   fileFilter:async (req, file, cb) => {
     const supportedFile = /pdf/;
@@ -23,10 +23,11 @@ const uploader = multer({
     } else{
       cb(new Error("Resume format must be pdf"));
     }
+
   },
   limits: {
     fileSize: 5000000,
   }
 })
 
-module.exports = uploader;
+module.exports = fileUploader;
